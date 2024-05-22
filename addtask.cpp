@@ -2,7 +2,8 @@
 #include "ui_addtask.h"
 #include <QDebug>
 
-AddTask::AddTask(TaskElement currentTask, bool adding ,QWidget *parent)
+
+AddTask::AddTask(TaskElement currentTask, bool adding, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::AddTask)
     ,task(currentTask)
@@ -11,6 +12,12 @@ AddTask::AddTask(TaskElement currentTask, bool adding ,QWidget *parent)
     ui->leTitle->setDisabled(adding);
     ui->dateEStart->setDate(task.getBegin());
     ui->dateEEnd->setDate(task.getEnd());
+
+    if(adding){
+
+    }else {
+
+    }
 }
 
 AddTask::~AddTask()
@@ -23,7 +30,6 @@ void AddTask::on_btnApply_clicked()
     if(task.getTitle() != ""){
         accept();
     }
-
 }
 
 
@@ -75,7 +81,6 @@ void AddTask::on_comBState_currentIndexChanged(int index)
     switch (index) {
     case 0:
         task.setState(TODO);
-
         break;
     case 1:
         task.setState(PROGRESS);
@@ -96,13 +101,5 @@ void AddTask::on_textEdit_textChanged()
 }
 
 TaskElement AddTask::getTask() const {return task;}
-
-
-
-
-
-
-
-
 
 

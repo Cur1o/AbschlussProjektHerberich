@@ -129,6 +129,28 @@ void MainWindow::on_btnAdd_clicked()
 
     if (taskDialog->exec() == QDialog::Accepted) {
         TaskElement resultTask = taskDialog->getTask();
+        // qDebug() << resultTask.getTitle();
+        // qDebug() << resultTask.getBegin();
+        // qDebug() << resultTask.getEnd();
+        // qDebug() << resultTask.getDuration();
+        // qDebug() << resultTask.getState();
+        // qDebug() << resultTask.getRemark();
+        // qDebug() << resultTask.getID();
+        dbManager->ADDItemToDatabase(resultTask);
+        AddItemToList(resultTask);
+    }
+    delete taskDialog;
+}
+
+
+void MainWindow::on_btnDetails_clicked()
+{
+    int row = ui->lvw1ToDo->currentIndex().row();
+    TaskElement newTask = dbManager->getTask(row);
+    AddTask *taskDialog = new AddTask(newTask, true, this);
+
+    if (taskDialog->exec() == QDialog::Accepted) {
+        TaskElement resultTask = taskDialog->getTask();
         qDebug() << resultTask.getTitle();
         qDebug() << resultTask.getBegin();
         qDebug() << resultTask.getEnd();
@@ -138,19 +160,10 @@ void MainWindow::on_btnAdd_clicked()
         resultTask.setID(currentID);
         qDebug() << resultTask.getID();
         AddItemToList(resultTask);
-        // dbManager->getTasks()->append(resultTask);
-        currentID += 1;
+        dbManager->UpdateItem(resultTask);
     }
     delete taskDialog;
-}
 
-
-void MainWindow::on_btnDetails_clicked()
-{
-
-    //Method get current selected to get the current ID from the View true the idex of the view an then the id in a Seperate List
-    // AddTask *task = new AddTask(*new TaskElement(), false);
-    // task->exec();
 }
 
 

@@ -23,6 +23,7 @@ public:
     DatabaseManager();
     int getTotalDatabaseID(){return totalDatabaseID;}
     QList<TaskElement> getTasks(int tasknumber = 0);
+    TaskElement getTask(int index);
 
     void UpdateItem(TaskElement taskToUpadate);
     void ADDItemToDatabase(TaskElement taskToCreate);

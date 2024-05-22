@@ -2,6 +2,7 @@
     <qresource prefix="/img">
         <file>CheckList.jpg</file>
         <file>logoShadiercorp.png</file>
+        <file>QtLogo.PNG</file>
     </qresource>
     <qresource prefix="/language">
         <file>AbschlussprojektHerberich_de_DE.ts</file>

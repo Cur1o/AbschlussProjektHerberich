@@ -40,6 +40,13 @@ QList<TaskElement> DatabaseManager::getTasks(int tasknumber)
         break;
     }
 }
+TaskElement DatabaseManager::getTask(int index)
+{
+    LoadFromDatabase();
+    QList<TaskElement> currentsTasks = getTasks();
+    TaskElement selectedTask = currentsTasks.at(index);
+    return selectedTask;
+}
 
 void DatabaseManager::UpdateItem(TaskElement taskToUpadate)
 {
@@ -64,6 +71,8 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
     localQuery.bindValue(":a_ende", taskToCreate.getEnd());
     localQuery.bindValue(":a_status", taskToCreate.getState());
     localQuery.bindValue(":a_bemerkung", taskToCreate.getRemark());
+
+    qDebug() << "Success Adding Data";
 }
 
 void DatabaseManager::LoadFromDatabase()
