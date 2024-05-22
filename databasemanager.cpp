@@ -67,11 +67,15 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
 
     localQuery.bindValue(":a_aufgabenbezeichnung", taskToCreate.getTitle());
     localQuery.bindValue(":a_dauer", taskToCreate.getDuration());
-    localQuery.bindValue(":a_beginn", taskToCreate.getBegin());
-    localQuery.bindValue(":a_ende", taskToCreate.getEnd());
+    localQuery.bindValue(":a_beginn", taskToCreate.getBegin().toString("yyyy-MM-dd"));
+    localQuery.bindValue(":a_ende", taskToCreate.getEnd().toString("yyyy-MM-dd"));
     localQuery.bindValue(":a_status", taskToCreate.getState());
     localQuery.bindValue(":a_bemerkung", taskToCreate.getRemark());
 
+    if(!localQuery.exec()){
+        qDebug()<< "Fehler beim schreiben: " << query->lastError();
+        return;
+    }
     qDebug() << "Success Adding Data";
 }
 
