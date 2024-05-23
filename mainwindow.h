@@ -46,6 +46,7 @@ private slots:
 
     void AddItemToList(TaskElement element);
     void AddItem(QStandardItemModel *model, int id, const QString &name);
+    void showTaskTooltip(const QModelIndex &index, int listType);
 
     void on_lvw1ToDo_clicked(const QModelIndex &index);
 

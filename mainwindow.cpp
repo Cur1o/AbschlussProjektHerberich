@@ -3,6 +3,7 @@
 #include "addtask.h"
 #include <QStringListModel>
 #include <QTranslator>
+#include <QToolTip>
 
 QTranslator translator;
 
@@ -167,24 +168,37 @@ void MainWindow::AddItem(QStandardItemModel *model, int id, const QString &name)
     model->appendRow(item);
 }
 
+QString getTaskDetails(TaskElement &task) {
+    return QString("ID: %1\nTitle: %2\nHours: %3\nBegin:  %4\nEnd: %5")
+        .arg(task.getID())
+        .arg(task.getTitle())
+        .arg(task.getDuration())
+        .arg(task.getBegin().toString())
+        .arg(task.getEnd().toString());
+}
+
+void MainWindow::showTaskTooltip(const QModelIndex &index, int listType) {
+    TaskElement selectedTask = dbManager->getTask(listType, index.row());
+    *currentTask = selectedTask;
+
+    QString tooltipText = getTaskDetails(selectedTask);
+    QToolTip::showText(QCursor::pos(), tooltipText);
+}
 
 void MainWindow::on_lvw1ToDo_clicked(const QModelIndex &index)
 {
-    TaskElement selectedTask = dbManager->getTask(1, index.row());
-    *currentTask = selectedTask;
+    showTaskTooltip(index, 1);
 }
 
 
 void MainWindow::on_lvw2Progress_clicked(const QModelIndex &index)
 {
-    TaskElement selectedTask = dbManager->getTask(2, index.row());
-    *currentTask = selectedTask;
+    showTaskTooltip(index, 2);
 }
 
 
 void MainWindow::on_lvw3Done_clicked(const QModelIndex &index)
 {
-    TaskElement selectedTask = dbManager->getTask(3, index.row());
-    *currentTask = selectedTask;
+    showTaskTooltip(index, 3);
 }
 

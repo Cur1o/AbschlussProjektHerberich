@@ -4,8 +4,8 @@ TaskElement::TaskElement(int id, QString title, int duration, QDateTime begin, Q
     this->_id = id;
     this->_title = title;
     this->_duration = duration;
-    this->setBegin(begin);
     this->setEnd(end);
+    this->setBegin(begin);
     this->setState(state);
     this->_remark = remark;
 }
@@ -45,7 +45,7 @@ bool TaskElement::setDuration(int duration){
 bool TaskElement::setBegin(QDateTime begin){
     if(begin < this->_end)
     {
-        _begin = begin;
+        this->_begin = begin;
         return true;
     }
     return false;

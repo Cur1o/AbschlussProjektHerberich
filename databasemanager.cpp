@@ -126,7 +126,6 @@ void DatabaseManager::LoadFromDatabase()
         if(stateInt == 1)state = PROGRESS;
         QString remark = query.value("a_bemerkung").toString();
 
-        // Erstelle ein TaskElement und füge es zur Liste hinzu
         TaskElement newTask(id,title, duration, begin, end, state, remark);
         if(stateInt == 0)this->tasksTODO->append(newTask);
         if(stateInt == 1)this->tasksPROGRESS->append(newTask);
@@ -183,9 +182,12 @@ void DatabaseManager::ChangeValueInListToList(int list1, int list2, int index)
             tasksTODO->append(taskToMove);
             break;
         case 2:
+            taskToMove.setBegin(QDateTime::currentDateTime());
+            taskToMove.setEnd(QDateTime::currentDateTime().addSecs(3600));
             tasksPROGRESS->append(taskToMove);
             break;
         case 3:
+            taskToMove.setEnd(QDateTime::currentDateTime());
             tasksDONE->append(taskToMove);
             break;
         default:

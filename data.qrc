@@ -3,6 +3,7 @@
         <file>CheckList.jpg</file>
         <file>logoShadiercorp.png</file>
         <file>QtLogo.PNG</file>
+        <file>SchadierCorpIcon.PNG</file>
     </qresource>
     <qresource prefix="/language">
         <file>translate_de.ts</file>
