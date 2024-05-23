@@ -19,7 +19,6 @@ TaskElement::TaskElement(QString title, int duration, QString remark){
     this->_end = _end.addDays(1);
 }
 bool TaskElement::setID(int id){
-    //Maybe Database Call how many ids exist
     if(id > 0){
         this->_id = id;
         return true;

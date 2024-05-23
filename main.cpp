@@ -4,10 +4,6 @@
 #include <QTimer>
 #include <QLabel>
 #include <QVBoxLayout>
-#include <QTranslator>
-#include <QLocale>
-#include <QLibraryInfo>
-#include <QSettings>
 
 class CustomSplashScreen : public QSplashScreen {
 public:
@@ -34,35 +30,14 @@ public:
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
-    QTranslator translator;
-    QSettings registry("HKEY_LOCAL_MACHINE\\SOFTWARE\\MYEDITOR", QSettings::IniFormat);
-
-    QString lang = registry.value("lang").toString(); //Reading Registry
-    lang = "en";
-
-    if(lang == "en") // dicision which translation to take
-    { //translate to english
-        QVariant var = translator.load(":/lang/translate_en.qm");//load translator file...
-        a.installTranslator(&translator); //... and install
-    }
-    else if(lang == "de")
-    {
-        //translate to german
-        QVariant var = translator.load(""); //Don't load, then standard language
-        a.installTranslator(&translator);
-    }
-
-    // Erstellen des Splash-Screens mit einem oberen und einem unteren Label
     QPixmap pixmap(":/img/QtLogo.PNG");
     CustomSplashScreen *splash = new CustomSplashScreen(pixmap.scaled(512, 512), "Herberich Sandro", "Starting Application...");
     splash->show();
 
-    // Warten für 5 Sekunden bevor das Hauptfenster angezeigt wird
     QTimer::singleShot(5000, splash, SLOT(close()));
 
     MainWindow w;
 
-    // Zeigt das Hauptfenster nach dem Schließen des Splash-Screens
     QTimer::singleShot(5000, &w, SLOT(show()));
 
     return a.exec();

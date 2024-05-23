@@ -47,6 +47,12 @@ private slots:
     void AddItemToList(TaskElement element);
     void AddItem(QStandardItemModel *model, int id, const QString &name);
 
+    void on_lvw1ToDo_clicked(const QModelIndex &index);
+
+    void on_lvw2Progress_clicked(const QModelIndex &index);
+
+    void on_lvw3Done_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     QStandardItemModel *ModelTODO;

@@ -13,7 +13,7 @@ class AddTask : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddTask(TaskElement currentTask, bool adding ,QWidget *parent = nullptr);
+    explicit AddTask(TaskElement currentTask, QWidget *parent = nullptr);
     ~AddTask();
 
     TaskElement getTask() const;

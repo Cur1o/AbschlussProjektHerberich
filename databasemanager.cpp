@@ -14,11 +14,11 @@ DatabaseManager::DatabaseManager()
 
     if(!db.open())
     {
-        qDebug() << "Zugriff fehlgeschlagen : " << db.lastError();
+        qDebug() << "Access Denied : " << db.lastError();
         return;
     }
     else
-        qDebug() << "DB geöffnet";
+        qDebug() << "DB Opened";
 
     LoadFromDatabase();
 }
@@ -70,7 +70,7 @@ void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
     localQuery.bindValue(":a_id", taskToUpdate.getID());
 
     if (!localQuery.exec()) {
-        qDebug() << "Fehler beim Schreiben: " << localQuery.lastError();
+        qDebug() << "Error while writing: " << localQuery.lastError();
         return;
     }
     qDebug() << "Success Updating Data";
@@ -96,7 +96,7 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
     localQuery.bindValue(":a_bemerkung", taskToCreate.getRemark());
 
     if(!localQuery.exec()){
-        qDebug()<< "Fehler beim schreiben: " << query->lastError();
+        qDebug()<< "Error while writing: " << query->lastError();
         return;
     }
     LoadFromDatabase();
@@ -109,7 +109,7 @@ void DatabaseManager::LoadFromDatabase()
     QString selectStatement = "SELECT * FROM aufgaben WHERE a_status != 2";
     if (!query.exec(selectStatement))
     {
-        qDebug() << "Fehler beim Lesen: " << query.lastError();
+        qDebug() << "Error while reading: " << query.lastError();
         return;
     }
     tasksTODO->clear();

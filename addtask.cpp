@@ -3,7 +3,7 @@
 #include <QDebug>
 
 
-AddTask::AddTask(TaskElement currentTask, bool adding, QWidget *parent)
+AddTask::AddTask(TaskElement currentTask, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::AddTask)
     ,task(currentTask)

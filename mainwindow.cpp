@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     dbManager = new DatabaseManager();
     BuildListView();
+    currentTask = new TaskElement();
 
     ui->actionDeutsch->setChecked(true);
     loadLanguage("de");
@@ -101,7 +102,7 @@ void MainWindow::on_btnThirdToSecond_clicked()
 void MainWindow::on_btnAdd_clicked()
 {
     TaskElement newTask;
-    AddTask *taskDialog = new AddTask(newTask, false, this);
+    AddTask *taskDialog = new AddTask(newTask, this);
 
     if (taskDialog->exec() == QDialog::Accepted) {
         TaskElement resultTask = taskDialog->getTask();
@@ -114,9 +115,12 @@ void MainWindow::on_btnAdd_clicked()
 
 void MainWindow::on_btnDetails_clicked()
 {
-    int row = ui->lvw1ToDo->currentIndex().row();
-    TaskElement newTask = dbManager->getTask(1, row);
-    AddTask *taskDialog = new AddTask(newTask, true, this);
+    //The Way Before that
+    // int row = ui->lvw1ToDo->currentIndex().row();
+    // TaskElement newTask = dbManager->getTask(1, row);
+    // AddTask *taskDialog = new AddTask(newTask, this);
+
+    AddTask *taskDialog = new AddTask(*currentTask, this);
 
     if (taskDialog->exec() == QDialog::Accepted) {
         TaskElement resultTask = taskDialog->getTask();
@@ -131,6 +135,8 @@ void MainWindow::on_btnEnd_clicked()
 {
     close();
 }
+
+//Extra Methods -------------------------------------------------------------------------
 
 void MainWindow::BuildListView(){
     ui->lvw1ToDo->model()->removeRows(0, ui->lvw1ToDo->model()->rowCount());
@@ -147,7 +153,6 @@ void MainWindow::BuildListView(){
     }
 }
 
-//Extra Methods
 void MainWindow::AddItemToList(TaskElement element){
     State currentState = element.getState();
     if(currentState+1 == 1)AddItem(ModelTODO, element.getID(),element.getTitle());
@@ -160,5 +165,26 @@ void MainWindow::AddItem(QStandardItemModel *model, int id, const QString &name)
     QStandardItem *item = new QStandardItem(QString("%1 - %2").arg(id).arg(name));
     item->setData(id, Qt::UserRole +1);
     model->appendRow(item);
+}
+
+
+void MainWindow::on_lvw1ToDo_clicked(const QModelIndex &index)
+{
+    TaskElement selectedTask = dbManager->getTask(1, index.row());
+    *currentTask = selectedTask;
+}
+
+
+void MainWindow::on_lvw2Progress_clicked(const QModelIndex &index)
+{
+    TaskElement selectedTask = dbManager->getTask(2, index.row());
+    *currentTask = selectedTask;
+}
+
+
+void MainWindow::on_lvw3Done_clicked(const QModelIndex &index)
+{
+    TaskElement selectedTask = dbManager->getTask(3, index.row());
+    *currentTask = selectedTask;
 }
 
