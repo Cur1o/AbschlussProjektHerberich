@@ -48,8 +48,6 @@ TaskElement DatabaseManager::getTask(int tasknumber,  int index)
     return selectedTask;
 }
 
-
-
 void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
 {
     QSqlQuery localQuery;
@@ -65,8 +63,8 @@ void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
 
     localQuery.bindValue(":a_aufgabenbezeichnung", taskToUpdate.getTitle());
     localQuery.bindValue(":a_dauer", taskToUpdate.getDuration());
-    localQuery.bindValue(":a_beginn", taskToUpdate.getBegin().toString("yyyy-MM-dd"));
-    localQuery.bindValue(":a_ende", taskToUpdate.getEnd().toString("yyyy-MM-dd"));
+    localQuery.bindValue(":a_beginn", taskToUpdate.getBegin().toString(Qt::ISODate));
+    localQuery.bindValue(":a_ende", taskToUpdate.getEnd().toString(Qt::ISODate));
     localQuery.bindValue(":a_status", taskToUpdate.getState());
     localQuery.bindValue(":a_bemerkung", taskToUpdate.getRemark());
     localQuery.bindValue(":a_id", taskToUpdate.getID());
@@ -75,10 +73,9 @@ void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
         qDebug() << "Fehler beim Schreiben: " << localQuery.lastError();
         return;
     }
-    LoadFromDatabase();
     qDebug() << "Success Updating Data";
+    LoadFromDatabase();
 }
-
 
 void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
 {
@@ -93,8 +90,8 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
 
     localQuery.bindValue(":a_aufgabenbezeichnung", taskToCreate.getTitle());
     localQuery.bindValue(":a_dauer", taskToCreate.getDuration());
-    localQuery.bindValue(":a_beginn", taskToCreate.getBegin().toString("yyyy-MM-dd"));
-    localQuery.bindValue(":a_ende", taskToCreate.getEnd().toString("yyyy-MM-dd"));
+    localQuery.bindValue(":a_beginn", taskToCreate.getBegin().toString(Qt::ISODate));
+    localQuery.bindValue(":a_ende", taskToCreate.getEnd().toString(Qt::ISODate));
     localQuery.bindValue(":a_status", taskToCreate.getState());
     localQuery.bindValue(":a_bemerkung", taskToCreate.getRemark());
 
@@ -115,14 +112,15 @@ void DatabaseManager::LoadFromDatabase()
         qDebug() << "Fehler beim Lesen: " << query.lastError();
         return;
     }
-
+    tasksTODO->clear();
+    tasksPROGRESS->clear();
     while (query.next())
     {
         int id = query.value("a_id").toInt();
         QString title = query.value("a_aufgabenbezeichnung").toString();
         int duration = query.value("a_dauer").toInt();
-        QDate begin = query.value("a_beginn").toDate();
-        QDate end = query.value("a_ende").toDate();
+        QDateTime begin = query.value("a_beginn").toDateTime();
+        QDateTime end = query.value("a_ende").toDateTime();
         int stateInt = query.value("a_status").toInt();
         State state = TODO;
         if(stateInt == 1)state = PROGRESS;
@@ -135,19 +133,15 @@ void DatabaseManager::LoadFromDatabase()
         this->tasks->append(newTask);
     }
     qDebug() << "Success Loading Data";
-    // qDebug() << tasksPROGRESS->data()->getTitle();
-}
-
-void DatabaseManager::saveToDatabase(){
 
 }
 
 void DatabaseManager::ChangeValueInListToList(int list1, int list2, int index)
 {
-    qDebug() << "Before operation:";
-    qDebug() << "TODO count:" << tasksTODO->count();
-    qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
-    qDebug() << "DONE count:" << tasksDONE->count();
+    // qDebug() << "Before operation:";
+    // qDebug() << "TODO count:" << tasksTODO->count();
+    // qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
+    // qDebug() << "DONE count:" << tasksDONE->count();
 
     TaskElement taskToMove;
     bool validOperation = false;
@@ -198,12 +192,13 @@ void DatabaseManager::ChangeValueInListToList(int list1, int list2, int index)
             qDebug() << "Invalid list2 value";
             break;
         }
+        UpdateItem(taskToMove);
     } else {
         qDebug() << "Invalid operation: The element could not be moved";
     }
 
-    qDebug() << "After operation:";
-    qDebug() << "TODO count:" << tasksTODO->count();
-    qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
-    qDebug() << "DONE count:" << tasksDONE->count();
+    // qDebug() << "After operation:";
+    // qDebug() << "TODO count:" << tasksTODO->count();
+    // qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
+    // qDebug() << "DONE count:" << tasksDONE->count();
 }

@@ -22,9 +22,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionAutoSpeichern_toggled(bool arg1);
-
-    void on_actionSpeichern_2_triggered();
+    void loadLanguage(const QString &language);
 
     void on_actionDeutsch_toggled(bool arg1);
 
@@ -48,10 +46,6 @@ private slots:
 
     void AddItemToList(TaskElement element);
     void AddItem(QStandardItemModel *model, int id, const QString &name);
-
-    // void RemoveItemFromList(QStandardItemModel *model, int id);
-    // void UpdateTaskState(int id, State newState);
-    // void dropEvent(QDropEvent *event);
 
 private:
     Ui::MainWindow *ui;

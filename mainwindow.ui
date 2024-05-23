@@ -418,19 +418,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDatei">
-    <property name="title">
-     <string>Datei</string>
-    </property>
-    <widget class="QMenu" name="menuSpeichern">
-     <property name="title">
-      <string>Speichern</string>
-     </property>
-     <addaction name="actionAutoSpeichern"/>
-     <addaction name="actionSpeichern_2"/>
-    </widget>
-    <addaction name="menuSpeichern"/>
-   </widget>
    <widget class="QMenu" name="menuEinstellungen">
     <property name="title">
      <string>Einstellungen</string>
@@ -444,23 +431,9 @@
     </widget>
     <addaction name="menuSprache"/>
    </widget>
-   <addaction name="menuDatei"/>
    <addaction name="menuEinstellungen"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionAutoSpeichern">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Auto Speichern</string>
-   </property>
-  </action>
-  <action name="actionSpeichern_2">
-   <property name="text">
-    <string>Speichern</string>
-   </property>
-  </action>
   <action name="actionDeutsch">
    <property name="checkable">
     <bool>true</bool>

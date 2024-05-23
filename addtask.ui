@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>459</width>
     <height>300</height>
    </rect>
   </property>
@@ -18,29 +18,50 @@
     <rect>
      <x>210</x>
      <y>80</y>
-     <width>131</width>
+     <width>181</width>
      <height>27</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
      <widget class="QLabel" name="lblEnd">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>30</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>Ende</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QDateEdit" name="dateEEnd">
-      <property name="calendarPopup">
-       <bool>false</bool>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="date">
-       <date>
-        <year>2024</year>
-        <month>1</month>
-        <day>2</day>
-       </date>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QDateTimeEdit" name="dateEEnd">
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -82,14 +103,14 @@
        <number>1</number>
       </property>
       <property name="maximum">
-       <number>365</number>
+       <number>8766</number>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>Tage</string>
+       <string>Strunden</string>
       </property>
      </widget>
     </item>
@@ -138,29 +159,47 @@
     <rect>
      <x>210</x>
      <y>50</y>
-     <width>131</width>
+     <width>181</width>
      <height>27</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <widget class="QLabel" name="lblStart">
+      <property name="maximumSize">
+       <size>
+        <width>30</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="text">
        <string>Begin</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QDateEdit" name="dateEStart">
-      <property name="calendarPopup">
-       <bool>false</bool>
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="date">
-       <date>
-        <year>2024</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QDateTimeEdit" name="dateEStart">
+      <property name="currentSection">
+       <enum>QDateTimeEdit::HourSection</enum>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -225,7 +264,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Cancle</string>
+    <string>Abbrechen</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btnApply">
@@ -238,14 +277,12 @@
     </rect>
    </property>
    <property name="text">
-    <string>Apply</string>
+    <string>Speichern</string>
    </property>
   </widget>
  </widget>
  <tabstops>
   <tabstop>leTitle</tabstop>
-  <tabstop>dateEStart</tabstop>
-  <tabstop>dateEEnd</tabstop>
   <tabstop>comBState</tabstop>
   <tabstop>textEdit</tabstop>
  </tabstops>

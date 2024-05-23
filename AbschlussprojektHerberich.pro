@@ -34,6 +34,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
 	data.qrc
 
-TRANSLATIONS += \
-	AbschlussprojektHerberich_de_DE.ts \
-	AbschlussprojektHerberich_en_GB.ts
+TRANSLATIONS += translate_de.ts \
+				translate_en.ts
+

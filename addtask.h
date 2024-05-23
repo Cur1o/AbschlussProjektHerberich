@@ -27,9 +27,9 @@ private slots:
 
     void on_sbDuration_valueChanged(int arg1);
 
-    void on_dateEStart_userDateChanged(const QDate &date);
+    void on_dateEStart_dateTimeChanged(const QDateTime &dateTime);
 
-    void on_dateEEnd_userDateChanged(const QDate &date);
+    void on_dateEEnd_dateTimeChanged(const QDateTime &dateTime);
 
     void on_comBState_currentIndexChanged(int index);
 

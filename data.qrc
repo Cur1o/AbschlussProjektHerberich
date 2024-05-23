@@ -5,7 +5,7 @@
         <file>QtLogo.PNG</file>
     </qresource>
     <qresource prefix="/language">
-        <file>AbschlussprojektHerberich_de_DE.ts</file>
-        <file>AbschlussprojektHerberich_en_GB.ts</file>
+        <file>translate_de.ts</file>
+        <file>translate_en.ts</file>
     </qresource>
 </RCC>

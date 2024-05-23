@@ -1,6 +1,6 @@
 #include "taskelement.h"
 
-TaskElement::TaskElement(int id, QString title, int duration, QDate begin, QDate end, State state, QString remark){
+TaskElement::TaskElement(int id, QString title, int duration, QDateTime begin, QDateTime end, State state, QString remark){
     this->_id = id;
     this->_title = title;
     this->_duration = duration;
@@ -14,8 +14,8 @@ TaskElement::TaskElement(QString title, int duration, QString remark){
     this->_title = title;
     this->_duration = duration;
     this->_remark = remark;
-    this->_begin = QDate::currentDate();
-    this->_end = QDate::currentDate();
+    this->_begin = QDateTime::currentDateTime();
+    this->_end = QDateTime::currentDateTime();
     this->_end = _end.addDays(1);
 }
 bool TaskElement::setID(int id){
@@ -43,7 +43,7 @@ bool TaskElement::setDuration(int duration){
     return false;
 }
 
-bool TaskElement::setBegin(QDate begin){
+bool TaskElement::setBegin(QDateTime begin){
     if(begin < this->_end)
     {
         _begin = begin;
@@ -52,7 +52,7 @@ bool TaskElement::setBegin(QDate begin){
     return false;
 }
 
-bool TaskElement::setEnd(QDate end){
+bool TaskElement::setEnd(QDateTime end){
     if(end > this->_begin){
         this->_end = end;
         return true;

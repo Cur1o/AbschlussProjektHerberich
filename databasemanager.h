@@ -31,10 +31,6 @@ public:
     void saveToDatabase();
 
     void ChangeValueInListToList(int list1 = 1, int list2 = 2 ,int index = 0);
-
-
-
-
 };
 
 #endif // DATABASEMANAGER_H

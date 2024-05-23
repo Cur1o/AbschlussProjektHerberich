@@ -11,10 +11,9 @@ AddTask::AddTask(TaskElement currentTask, bool adding, QWidget *parent)
     ui->setupUi(this);
     ui->leTitle->setText(task.getTitle());
     ui->sbDuration->setValue(task.getDuration());
-    ui->dateEStart->setDate(QDate::currentDate());
-    qDebug() << task.getBegin();
-    qDebug() << task.getDuration();
-    ui->dateEEnd->setDate(task.getEnd());
+    ui->dateEStart->setDateTime(QDateTime::currentDateTime());
+    task.setBegin(QDateTime::currentDateTime());
+    ui->dateEEnd->setDateTime(task.getEnd());
 
 }
 
@@ -33,7 +32,7 @@ void AddTask::on_btnApply_clicked()
 
 void AddTask::on_btnCancle_clicked()
 {
-    // delete ui;
+    reject();
 }
 
 
@@ -42,39 +41,50 @@ void AddTask::on_leTitle_editingFinished()
     task.setTitle(ui->leTitle->text());
 }
 
-void AddTask::on_sbDuration_valueChanged(int days)
+void AddTask::on_sbDuration_valueChanged(int hours)
 {
-    QDate newEndDate = task.getBegin().addDays(days);
-    ui->dateEEnd->setDate(newEndDate);
-    task.setDuration(days);
+    QDateTime newEndDate = task.getBegin().addSecs(hours * 3600);
+    ui->dateEEnd->setDateTime(newEndDate);
+    task.setEnd(newEndDate);
+    task.setDuration(hours);
 }
 
-void AddTask::on_dateEStart_userDateChanged(const QDate &date)
+void AddTask::on_dateEStart_dateTimeChanged(const QDateTime &dateTime)
 {
-    if(date < task.getEnd() && date >= QDate::currentDate()){
-        task.setBegin(date);
-        qint64 days = task.getBegin().daysTo(task.getEnd());
-        ui->sbDuration->setValue(days);
-        task.setDuration(days);
+    QDateTime newDateTime = dateTime;
+    if (dateTime.date() == QDateTime::currentDateTime().date()) {
+        // Wenn das Startdatum das aktuelle Datum ist, fügen Sie 30 Minuten hinzu
+        newDateTime = dateTime.addSecs(1800);
     }
-    else{
-        ui->dateEStart->setDate(QDate::currentDate());
+
+    if (newDateTime < task.getEnd()) {
+        task.setBegin(newDateTime);
+        qint64 hours = task.getBegin().secsTo(task.getEnd()) / 3600; // Umrechnung in Stunden
+        ui->sbDuration->setValue(hours);
+        task.setDuration(hours);
+    } else {
+        ui->dateEStart->setDateTime(task.getEnd().addSecs(-1800));
     }
 }
 
-
-void AddTask::on_dateEEnd_userDateChanged(const QDate &date)
+void AddTask::on_dateEEnd_dateTimeChanged(const QDateTime &dateTime)
 {
-    if(date > task.getBegin() ){
-      task.setEnd(date);
-        qint64 days = task.getBegin().daysTo(task.getEnd());
-        ui->sbDuration->setValue(days);
-        task.setDuration(days);
+    QDateTime newDateTime = dateTime;
+    if (dateTime.date() == task.getBegin().date() && dateTime < task.getBegin().addSecs(1800)) {
+        // Wenn das Enddatum auf denselben Tag wie der Startdatum fällt und weniger als 30 Minuten später ist
+        newDateTime = task.getBegin().addSecs(1800);
     }
-    else{
-        ui->dateEEnd->setDate(task.getBegin().addDays(1));
+
+    if (newDateTime > task.getBegin()) {
+        task.setEnd(newDateTime);
+        qint64 hours = task.getBegin().secsTo(task.getEnd()) / 3600; // Umrechnung in Stunden
+        ui->sbDuration->setValue(hours);
+        task.setDuration(hours);
+    } else {
+        ui->dateEEnd->setDateTime(task.getBegin().addSecs(1800));
     }
 }
+
 
 void AddTask::on_comBState_currentIndexChanged(int index)
 {
@@ -101,5 +111,11 @@ void AddTask::on_textEdit_textChanged()
 }
 
 TaskElement AddTask::getTask() const {return task;}
+
+
+
+
+
+
 
 
