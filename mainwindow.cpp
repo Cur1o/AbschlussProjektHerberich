@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     BuildListView();
 
     ui->actionDeutsch->setChecked(true);
+    loadLanguage("de");
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +41,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadLanguage(const QString &language)
 {
-    if (!translator.load(":/language/translate_" + language + ".ts")) {
+    if (!translator.load(":/language/translate_" + language + ".qm")) {
         qWarning() << "Could not load translation file for" << language;
         return;
     }

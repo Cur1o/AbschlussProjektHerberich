@@ -7,5 +7,7 @@
     <qresource prefix="/language">
         <file>translate_de.ts</file>
         <file>translate_en.ts</file>
+        <file>translate_de.qm</file>
+        <file>translate_en.qm</file>
     </qresource>
 </RCC>

@@ -84,7 +84,7 @@
     <message>
         <location filename="mainwindow.ui" line="84"/>
         <source>Unerledigt</source>
-        <translation>To Do</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="97"/>

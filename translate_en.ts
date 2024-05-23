@@ -112,7 +112,7 @@
     <message>
         <location filename="mainwindow.ui" line="278"/>
         <source>Hinzufügen</source>
-        <translation></translation>
+        <translation>Add</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="334"/>
