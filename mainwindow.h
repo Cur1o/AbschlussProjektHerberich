@@ -44,12 +44,14 @@ private slots:
 
     void on_btnEnd_clicked();
 
+    void BuildListView();
 
     void AddItemToList(TaskElement element);
     void AddItem(QStandardItemModel *model, int id, const QString &name);
-    void RemoveItemFromList(QStandardItemModel *model, int id);
-    void UpdateTaskState(int id, State newState);
-    void dropEvent(QDropEvent *event);
+
+    // void RemoveItemFromList(QStandardItemModel *model, int id);
+    // void UpdateTaskState(int id, State newState);
+    // void dropEvent(QDropEvent *event);
 
 private:
     Ui::MainWindow *ui;

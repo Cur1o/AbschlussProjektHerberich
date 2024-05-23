@@ -40,17 +40,43 @@ QList<TaskElement> DatabaseManager::getTasks(int tasknumber)
         break;
     }
 }
-TaskElement DatabaseManager::getTask(int index)
+TaskElement DatabaseManager::getTask(int tasknumber,  int index)
 {
     LoadFromDatabase();
-    QList<TaskElement> currentsTasks = getTasks();
-    TaskElement selectedTask = currentsTasks.at(index);
+    QList<TaskElement> currentTasks = getTasks(tasknumber);
+    TaskElement selectedTask = currentTasks.at(index);
     return selectedTask;
 }
 
-void DatabaseManager::UpdateItem(TaskElement taskToUpadate)
-{
 
+
+void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
+{
+    QSqlQuery localQuery;
+    localQuery.prepare("UPDATE aufgaben "
+                       "SET "
+                       "a_aufgabenbezeichnung = :a_aufgabenbezeichnung, "
+                       "a_dauer = :a_dauer, "
+                       "a_beginn = :a_beginn, "
+                       "a_ende = :a_ende, "
+                       "a_status = :a_status, "
+                       "a_bemerkung = :a_bemerkung "
+                       "WHERE a_id = :a_id");
+
+    localQuery.bindValue(":a_aufgabenbezeichnung", taskToUpdate.getTitle());
+    localQuery.bindValue(":a_dauer", taskToUpdate.getDuration());
+    localQuery.bindValue(":a_beginn", taskToUpdate.getBegin().toString("yyyy-MM-dd"));
+    localQuery.bindValue(":a_ende", taskToUpdate.getEnd().toString("yyyy-MM-dd"));
+    localQuery.bindValue(":a_status", taskToUpdate.getState());
+    localQuery.bindValue(":a_bemerkung", taskToUpdate.getRemark());
+    localQuery.bindValue(":a_id", taskToUpdate.getID());
+
+    if (!localQuery.exec()) {
+        qDebug() << "Fehler beim Schreiben: " << localQuery.lastError();
+        return;
+    }
+    LoadFromDatabase();
+    qDebug() << "Success Updating Data";
 }
 
 
@@ -76,6 +102,7 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
         qDebug()<< "Fehler beim schreiben: " << query->lastError();
         return;
     }
+    LoadFromDatabase();
     qDebug() << "Success Adding Data";
 }
 
@@ -108,20 +135,75 @@ void DatabaseManager::LoadFromDatabase()
         this->tasks->append(newTask);
     }
     qDebug() << "Success Loading Data";
-    qDebug() << tasksTODO->data()->getTitle();
+    // qDebug() << tasksPROGRESS->data()->getTitle();
 }
 
-void saveToDatabase();
-// void Widget::hohle_Daten(){
-//     //Abfrage formulieren
-//     QString sqlStatement = "select * from mitarbeiter"; //Formulieren der Abfrage
-//     query = new QSqlQuery(db);
+void DatabaseManager::saveToDatabase(){
 
-//     if(!query->exec(sqlStatement))      //Führe die SQL-Anweisung (Abfrage) aus.
-//     {
-//         qDebug() << "Fehler beim Lesen: " << query->lastError();
-//         return;
-//     }
-//     record_count = query->numRowsAffected();    //Merke die Anzahl der gelesenen Datensätze
-//     qDebug() << "Daten gelesen";
-// }
+}
+
+void DatabaseManager::ChangeValueInListToList(int list1, int list2, int index)
+{
+    qDebug() << "Before operation:";
+    qDebug() << "TODO count:" << tasksTODO->count();
+    qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
+    qDebug() << "DONE count:" << tasksDONE->count();
+
+    TaskElement taskToMove;
+    bool validOperation = false;
+
+    switch (list1) {
+    case 1:
+        if (index >= 0 && index < tasksTODO->size()) {
+            taskToMove = tasksTODO->at(index);
+            tasksTODO->removeAt(index);
+            validOperation = true;
+        }
+        break;
+    case 2:
+        if (index >= 0 && index < tasksPROGRESS->size()) {
+            taskToMove = tasksPROGRESS->at(index);
+            tasksPROGRESS->removeAt(index);
+            validOperation = true;
+        }
+        break;
+    case 3:
+        if (index >= 0 && index < tasksDONE->size()) {
+            taskToMove = tasksDONE->at(index);
+            tasksDONE->removeAt(index);
+            validOperation = true;
+        }
+        break;
+    default:
+        qDebug() << "Invalid list1 value";
+        return;
+    }
+
+    if (validOperation) {
+        if (list2 == 1) taskToMove.setState(TODO);
+        if (list2 == 2) taskToMove.setState(PROGRESS);
+        if (list2 == 3) taskToMove.setState(DONE);
+
+        switch (list2) {
+        case 1:
+            tasksTODO->append(taskToMove);
+            break;
+        case 2:
+            tasksPROGRESS->append(taskToMove);
+            break;
+        case 3:
+            tasksDONE->append(taskToMove);
+            break;
+        default:
+            qDebug() << "Invalid list2 value";
+            break;
+        }
+    } else {
+        qDebug() << "Invalid operation: The element could not be moved";
+    }
+
+    qDebug() << "After operation:";
+    qDebug() << "TODO count:" << tasksTODO->count();
+    qDebug() << "PROGRESS count:" << tasksPROGRESS->count();
+    qDebug() << "DONE count:" << tasksDONE->count();
+}

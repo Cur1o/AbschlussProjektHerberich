@@ -9,15 +9,13 @@ AddTask::AddTask(TaskElement currentTask, bool adding, QWidget *parent)
     ,task(currentTask)
 {
     ui->setupUi(this);
-    ui->leTitle->setDisabled(adding);
-    ui->dateEStart->setDate(task.getBegin());
+    ui->leTitle->setText(task.getTitle());
+    ui->sbDuration->setValue(task.getDuration());
+    ui->dateEStart->setDate(QDate::currentDate());
+    qDebug() << task.getBegin();
+    qDebug() << task.getDuration();
     ui->dateEEnd->setDate(task.getEnd());
 
-    if(adding){
-
-    }else {
-
-    }
 }
 
 AddTask::~AddTask()
@@ -35,7 +33,7 @@ void AddTask::on_btnApply_clicked()
 
 void AddTask::on_btnCancle_clicked()
 {
-
+    // delete ui;
 }
 
 
@@ -48,6 +46,7 @@ void AddTask::on_sbDuration_valueChanged(int days)
 {
     QDate newEndDate = task.getBegin().addDays(days);
     ui->dateEEnd->setDate(newEndDate);
+    task.setDuration(days);
 }
 
 void AddTask::on_dateEStart_userDateChanged(const QDate &date)
@@ -56,11 +55,11 @@ void AddTask::on_dateEStart_userDateChanged(const QDate &date)
         task.setBegin(date);
         qint64 days = task.getBegin().daysTo(task.getEnd());
         ui->sbDuration->setValue(days);
+        task.setDuration(days);
     }
     else{
         ui->dateEStart->setDate(QDate::currentDate());
     }
-    // qDebug() << task.getBegin() << ", "<< task.getEnd();
 }
 
 
@@ -70,6 +69,7 @@ void AddTask::on_dateEEnd_userDateChanged(const QDate &date)
       task.setEnd(date);
         qint64 days = task.getBegin().daysTo(task.getEnd());
         ui->sbDuration->setValue(days);
+        task.setDuration(days);
     }
     else{
         ui->dateEEnd->setDate(task.getBegin().addDays(1));
