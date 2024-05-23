@@ -290,8 +290,13 @@
  </widget>
  <tabstops>
   <tabstop>leTitle</tabstop>
+  <tabstop>sbDuration</tabstop>
   <tabstop>comBState</tabstop>
+  <tabstop>dateEStart</tabstop>
+  <tabstop>dateEEnd</tabstop>
   <tabstop>textEdit</tabstop>
+  <tabstop>btnApply</tabstop>
+  <tabstop>btnCancle</tabstop>
  </tabstops>
  <resources>
   <include location="data.qrc"/>

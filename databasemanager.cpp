@@ -9,7 +9,7 @@ DatabaseManager::DatabaseManager()
 
     db = QSqlDatabase::addDatabase("QODBC");
     db.setConnectOptions();
-    QString connectionString = "Driver={Sql Server};Server=SANDRORECHNER\\SQLEXPRESS;database=scheduler;trusted_connection=yes";
+    QString connectionString = "Driver={Sql Server};Server=localhost\\SQLEXPRESS;database=scheduler;trusted_connection=yes";
     db.setDatabaseName(connectionString);
 
     if(!db.open())

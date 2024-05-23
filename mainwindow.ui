@@ -508,6 +508,18 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>lvw1ToDo</tabstop>
+  <tabstop>btnFirstToSecond</tabstop>
+  <tabstop>lvw2Progress</tabstop>
+  <tabstop>btnSecondToFirst</tabstop>
+  <tabstop>btnSecondToThird</tabstop>
+  <tabstop>lvw3Done</tabstop>
+  <tabstop>btnThirdToSecond</tabstop>
+  <tabstop>btnDetails</tabstop>
+  <tabstop>btnEnd</tabstop>
+ </tabstops>
  <resources>
   <include location="data.qrc"/>
  </resources>

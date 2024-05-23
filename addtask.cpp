@@ -14,7 +14,7 @@ AddTask::AddTask(TaskElement currentTask, QWidget *parent)
     ui->dateEStart->setDateTime(QDateTime::currentDateTime());
     task.setBegin(QDateTime::currentDateTime());
     ui->dateEEnd->setDateTime(task.getEnd());
-
+    ui->comBState->setCurrentIndex(task.getState());
 }
 
 AddTask::~AddTask()

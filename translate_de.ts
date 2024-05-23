@@ -9,62 +9,62 @@
         <translation>Hinzufügen/Bearbeiten</translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="41"/>
+        <location filename="addtask.ui" line="45"/>
         <source>Ende</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="83"/>
+        <location filename="addtask.ui" line="87"/>
         <source>Dauer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="113"/>
+        <location filename="addtask.ui" line="117"/>
         <source>Strunden</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="132"/>
+        <location filename="addtask.ui" line="136"/>
         <source>Status</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="140"/>
+        <location filename="addtask.ui" line="144"/>
         <source>TODO</source>
         <translation>Unerledigt</translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="145"/>
+        <location filename="addtask.ui" line="149"/>
         <source>PROGRESS</source>
         <translation>In Arbeit</translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="150"/>
+        <location filename="addtask.ui" line="154"/>
         <source>DONE</source>
         <translation>Erledigt</translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="176"/>
+        <location filename="addtask.ui" line="180"/>
         <source>Begin</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="221"/>
+        <location filename="addtask.ui" line="225"/>
         <source>Titel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="254"/>
+        <location filename="addtask.ui" line="258"/>
         <source>Aufgabe Hinzufügen oder Bearbeiten</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="267"/>
+        <location filename="addtask.ui" line="274"/>
         <source>Abbrechen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="addtask.ui" line="280"/>
+        <location filename="addtask.ui" line="287"/>
         <source>Speichern</source>
         <translation></translation>
     </message>
@@ -77,69 +77,69 @@
         <translation>Aufgaben Planer</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="52"/>
+        <location filename="mainwindow.ui" line="56"/>
         <source>Aufgabenplaner</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="84"/>
+        <location filename="mainwindow.ui" line="111"/>
         <source>Unerledigt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="97"/>
+        <location filename="mainwindow.ui" line="253"/>
         <source>In Arbeit</source>
         <translation>In Arbeit</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="110"/>
+        <location filename="mainwindow.ui" line="398"/>
         <source>Erledigt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="139"/>
-        <location filename="mainwindow.ui" line="204"/>
+        <location filename="mainwindow.ui" line="194"/>
+        <location filename="mainwindow.ui" line="339"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="146"/>
-        <location filename="mainwindow.ui" line="211"/>
+        <location filename="mainwindow.ui" line="201"/>
+        <location filename="mainwindow.ui" line="346"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="278"/>
+        <location filename="mainwindow.ui" line="155"/>
         <source>Hinzufügen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="334"/>
+        <location filename="mainwindow.ui" line="297"/>
         <source>Details</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="390"/>
+        <location filename="mainwindow.ui" line="442"/>
         <source>Beenden</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="423"/>
+        <location filename="mainwindow.ui" line="477"/>
         <source>Einstellungen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="427"/>
+        <location filename="mainwindow.ui" line="481"/>
         <source>Sprache</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="445"/>
+        <location filename="mainwindow.ui" line="499"/>
         <source>Deutsch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="453"/>
+        <location filename="mainwindow.ui" line="507"/>
         <source>Englisch</source>
         <translation></translation>
     </message>
