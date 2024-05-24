@@ -2,7 +2,6 @@
 #include "ui_addtask.h"
 #include <QDebug>
 
-
 AddTask::AddTask(TaskElement currentTask, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::AddTask)
@@ -22,6 +21,7 @@ AddTask::~AddTask()
     delete ui;
 }
 
+//The window is closed with accept signal
 void AddTask::on_btnApply_clicked()
 {
     if(task.getTitle() != ""){
@@ -35,12 +35,13 @@ void AddTask::on_btnCancle_clicked()
     reject();
 }
 
-
+//The title of the task is updated
 void AddTask::on_leTitle_editingFinished()
 {
     task.setTitle(ui->leTitle->text());
 }
 
+//The Duration is updated and changes the hours from 1 up to 8677
 void AddTask::on_sbDuration_valueChanged(int hours)
 {
     QDateTime newEndDate = task.getBegin().addSecs(hours * 3600);
@@ -49,6 +50,7 @@ void AddTask::on_sbDuration_valueChanged(int hours)
     task.setDuration(hours);
 }
 
+//The begin is changed
 void AddTask::on_dateEStart_dateTimeChanged(const QDateTime &dateTime)
 {
     QDateTime newDateTime = dateTime;
@@ -67,6 +69,7 @@ void AddTask::on_dateEStart_dateTimeChanged(const QDateTime &dateTime)
     }
 }
 
+//The end is changed
 void AddTask::on_dateEEnd_dateTimeChanged(const QDateTime &dateTime)
 {
     QDateTime newDateTime = dateTime;
@@ -85,7 +88,7 @@ void AddTask::on_dateEEnd_dateTimeChanged(const QDateTime &dateTime)
     }
 }
 
-
+//The state is changed
 void AddTask::on_comBState_currentIndexChanged(int index)
 {
     switch (index) {
@@ -94,10 +97,6 @@ void AddTask::on_comBState_currentIndexChanged(int index)
         break;
     case 1:
         task.setState(PROGRESS);
-
-        break;
-    case 2:
-        task.setState(DONE);
         break;
     default:
         task.setState(TODO);
@@ -105,11 +104,13 @@ void AddTask::on_comBState_currentIndexChanged(int index)
     }
 }
 
+//The remark is changed
 void AddTask::on_textEdit_textChanged()
 {
     task.setRemark(ui->textEdit->toPlainText());
 }
 
+//The Task is returned when called
 TaskElement AddTask::getTask() const {return task;}
 
 

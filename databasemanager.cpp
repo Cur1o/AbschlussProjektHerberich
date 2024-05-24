@@ -17,12 +17,12 @@ DatabaseManager::DatabaseManager()
         qDebug() << "Access Denied : " << db.lastError();
         return;
     }
-    else
-        qDebug() << "DB Opened";
+    else qDebug() << "DB Opened";
 
     LoadFromDatabase();
 }
 
+//get Tasks retuns all tipes of QList<TaskElement>
 QList<TaskElement> DatabaseManager::getTasks(int tasknumber)
 {
     switch (tasknumber) {
@@ -40,6 +40,8 @@ QList<TaskElement> DatabaseManager::getTasks(int tasknumber)
         break;
     }
 }
+
+//Get a specific task from the Task Lists
 TaskElement DatabaseManager::getTask(int tasknumber,  int index)
 {
     LoadFromDatabase();
@@ -48,6 +50,7 @@ TaskElement DatabaseManager::getTask(int tasknumber,  int index)
     return selectedTask;
 }
 
+//If you change values in a Task Elemnt the database is Updated Here
 void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
 {
     QSqlQuery localQuery;
@@ -77,6 +80,7 @@ void DatabaseManager::UpdateItem(TaskElement taskToUpdate)
     LoadFromDatabase();
 }
 
+//If you create A New TaskElement this Method is called to write this Element in the Database
 void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
 {
     QSqlQuery localQuery;
@@ -99,10 +103,11 @@ void DatabaseManager::ADDItemToDatabase(TaskElement taskToCreate)
         qDebug()<< "Error while writing: " << query->lastError();
         return;
     }
-    LoadFromDatabase();
     qDebug() << "Success Adding Data";
+    LoadFromDatabase();
 }
 
+//Loads all Data from the Database where the state is not 2
 void DatabaseManager::LoadFromDatabase()
 {
     QSqlQuery query;
@@ -135,6 +140,7 @@ void DatabaseManager::LoadFromDatabase()
 
 }
 
+//Writes the TaskElement from one List to another
 void DatabaseManager::ChangeValueInListToList(int list1, int list2, int index)
 {
     // qDebug() << "Before operation:";

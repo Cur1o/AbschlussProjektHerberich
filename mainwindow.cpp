@@ -41,6 +41,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//This switches the language in real time witout restarting the programm
 void MainWindow::loadLanguage(const QString &language)
 {
     if (!translator.load(":/language/translate_" + language + ".qm")) {
@@ -52,6 +53,7 @@ void MainWindow::loadLanguage(const QString &language)
     ui->retranslateUi(this);
 }
 
+//If the German menu is toggeld the Language is switched To German
 void MainWindow::on_actionDeutsch_toggled(bool checked)
 {
     if (checked) {
@@ -60,6 +62,7 @@ void MainWindow::on_actionDeutsch_toggled(bool checked)
     }
 }
 
+//If the Englisch menu is toggeld the language is switched to Englisch
 void MainWindow::on_actionEnglisch_toggled(bool checked)
 {
     if (checked) {
@@ -67,7 +70,7 @@ void MainWindow::on_actionEnglisch_toggled(bool checked)
         ui->actionDeutsch->setChecked(false);
     }
 }
-
+//Moves Item from List 1 to 2
 void MainWindow::on_btnFirstToSecond_clicked()
 {
     int index = ui->lvw1ToDo->currentIndex().row();
@@ -75,7 +78,7 @@ void MainWindow::on_btnFirstToSecond_clicked()
     BuildListView();
 }
 
-
+//Moves Item from List 2 to 1
 void MainWindow::on_btnSecondToFirst_clicked()
 {
     int index = ui->lvw2Progress->currentIndex().row();
@@ -83,7 +86,7 @@ void MainWindow::on_btnSecondToFirst_clicked()
     BuildListView();
 }
 
-
+//Moves Item from List 2 to 3
 void MainWindow::on_btnSecondToThird_clicked()
 {
     int index = ui->lvw2Progress->currentIndex().row();
@@ -91,7 +94,7 @@ void MainWindow::on_btnSecondToThird_clicked()
     BuildListView();
 }
 
-
+//Moves Item from List 3 to 2
 void MainWindow::on_btnThirdToSecond_clicked()
 {
     int index = ui->lvw3Done->currentIndex().row();
@@ -99,7 +102,7 @@ void MainWindow::on_btnThirdToSecond_clicked()
     BuildListView();
 }
 
-
+//Creates a Net TaskElement
 void MainWindow::on_btnAdd_clicked()
 {
     TaskElement newTask;
@@ -113,10 +116,10 @@ void MainWindow::on_btnAdd_clicked()
     delete taskDialog;
 }
 
-
+//Edits a existing TaskElement
 void MainWindow::on_btnDetails_clicked()
 {
-    //The Way Before that
+    //The Way Before the clobaly saved variable
     // int row = ui->lvw1ToDo->currentIndex().row();
     // TaskElement newTask = dbManager->getTask(1, row);
     // AddTask *taskDialog = new AddTask(newTask, this);
@@ -125,13 +128,13 @@ void MainWindow::on_btnDetails_clicked()
 
     if (taskDialog->exec() == QDialog::Accepted) {
         TaskElement resultTask = taskDialog->getTask();
-        qDebug() << resultTask.getID();
         dbManager->UpdateItem(resultTask);
+        BuildListView();
     }
     delete taskDialog;
-
 }
 
+//Closes the programm no saving needed
 void MainWindow::on_btnEnd_clicked()
 {
     close();
@@ -139,6 +142,7 @@ void MainWindow::on_btnEnd_clicked()
 
 //Extra Methods -------------------------------------------------------------------------
 
+//Here the items for the ListView are sorted with the state
 void MainWindow::BuildListView(){
     ui->lvw1ToDo->model()->removeRows(0, ui->lvw1ToDo->model()->rowCount());
     ui->lvw2Progress->model()->removeRows(0, ui->lvw2Progress->model()->rowCount());
@@ -154,6 +158,7 @@ void MainWindow::BuildListView(){
     }
 }
 
+//The UI gets created
 void MainWindow::AddItemToList(TaskElement element){
     State currentState = element.getState();
     if(currentState+1 == 1)AddItem(ModelTODO, element.getID(),element.getTitle());
@@ -161,6 +166,7 @@ void MainWindow::AddItemToList(TaskElement element){
     if(currentState+1 == 3)AddItem(ModelDONE, element.getID(),element.getTitle());
 }
 
+//The formating of the List Element
 void MainWindow::AddItem(QStandardItemModel *model, int id, const QString &name)
 {
     QStandardItem *item = new QStandardItem(QString("%1 - %2").arg(id).arg(name));
@@ -168,6 +174,7 @@ void MainWindow::AddItem(QStandardItemModel *model, int id, const QString &name)
     model->appendRow(item);
 }
 
+//The building of the tooltip
 QString getTaskDetails(TaskElement &task) {
     return QString("ID: %1\nTitle: %2\nHours: %3\nBegin:  %4\nEnd: %5")
         .arg(task.getID())
@@ -177,6 +184,7 @@ QString getTaskDetails(TaskElement &task) {
         .arg(task.getEnd().toString());
 }
 
+//Managment of the tooltip cration and sets the last clicked object to current Task
 void MainWindow::showTaskTooltip(const QModelIndex &index, int listType) {
     TaskElement selectedTask = dbManager->getTask(listType, index.row());
     *currentTask = selectedTask;
@@ -185,18 +193,19 @@ void MainWindow::showTaskTooltip(const QModelIndex &index, int listType) {
     QToolTip::showText(QCursor::pos(), tooltipText);
 }
 
+//calls tooltip creation with the current model 1
 void MainWindow::on_lvw1ToDo_clicked(const QModelIndex &index)
 {
     showTaskTooltip(index, 1);
 }
 
-
+//calls tooltip creation with the current model 2
 void MainWindow::on_lvw2Progress_clicked(const QModelIndex &index)
 {
     showTaskTooltip(index, 2);
 }
 
-
+//calls tooltip creation with the current model 3
 void MainWindow::on_lvw3Done_clicked(const QModelIndex &index)
 {
     showTaskTooltip(index, 3);

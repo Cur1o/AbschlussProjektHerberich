@@ -149,11 +149,6 @@
         <string>PROGRESS</string>
        </property>
       </item>
-      <item>
-       <property name="text">
-        <string>DONE</string>
-       </property>
-      </item>
      </widget>
     </item>
    </layout>
