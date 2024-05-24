@@ -19,7 +19,7 @@ public:
 
         QVBoxLayout *layout = new QVBoxLayout(this);
         layout->addWidget(topMessageLabel);
-        layout->addStretch();  // Adds space between the labels
+        layout->addStretch();
         layout->addWidget(bottomMessageLabel);
         layout->setAlignment(topMessageLabel, Qt::AlignTop);
         layout->setAlignment(bottomMessageLabel, Qt::AlignBottom);
