@@ -36,7 +36,9 @@ private:
 
 ```
 Programm Structure
+
 Headers:
+
     addtask.h: inplementation of the Methods.
     databasemanager.h: inplementation of the Methods.
     enums.h: Here all the enums of Task element. enum State{TODO, PROGRESS, DONE};
@@ -44,17 +46,27 @@ Headers:
     taskelement.h: inplementation of the TaskElement CLass.
 
 Sources:
+
     addtask.cpp: Ths is a Class which manages the user input for the task creation and edeting.
+    
     databasemanager.cpp: Here all the database commands are proccesed and it is responsible for data handlinjg and storing.
-    main.cpp: The main of the Application. A custom  Splash Screen is implemented and schown for 5 sec at the start. the main window is executed afther this 5 sec.
-    mainwindow.cpp: Here all the main UI is handeld like opening the Edit or Add window. Or changing the language from German to English and updating the UI.
+    
+    main.cpp: The main of the Application. A custom  Splash Screen is implemented and schown for 5 sec at the start. the main window is executed 
+    afther this 5 sec.
+    
+    mainwindow.cpp: Here all the main UI is handeld like opening the Edit or Add window. Or changing the language from German to English and 
+    updating the UI.
+    
     taskelement.cpp: This is the TaskElement Class. Here all the Data from 1 row of the database is stored.
 
 Forms:
+
     addtask.ui: The UI of the Add or Edit window.
+    
     mainwindow.ui: The UI of the Main Application.
 
 Resources:
+
     data.qrc: The resource file where all the external data is stored.
         /img
             logos and icons are stored here.
