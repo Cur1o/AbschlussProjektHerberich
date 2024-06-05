@@ -1,6 +1,6 @@
 # AbschlussProjektHerberich
 Qt Version 6.6.3
-The objective of this Project was to create a Task managment system with database interactions. 
+The objective of this Project was to create a Task management system with database interactions. 
 Where you can create and Edit Tasks. The tasks have 3 states ToDo, Pending and Done. 
 
 The used Database
